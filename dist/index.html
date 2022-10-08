@@ -5,19 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="header">
-        <div>The Logo will be here</div>
+    <div class="container">    
+        <div id="header" class="header">
+            <div>The Logo will be here</div>
+        </div>
+
+        <div id="sidebar" class="sidebar">
+            <div>project 1</div>
+            <div>project 2</div>
+            <div>project 3</div>
+            <div>project 4</div>
+        </div>
+
+        <div id="content" class="content">
+            <button id="addButton">
+                <h1>+</h1>
+            </button>
+        </div>
     </div>
-
-    <button id="addButton">add new to do item</button>
-
-    <div id="sidebar">
-
-    </div>
-
-    <div id="content"></div>
-    <script src="main.js"></script>
+        <script src="main.js"></script>
 </body>
 </html>

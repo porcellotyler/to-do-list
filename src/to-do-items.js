@@ -7,6 +7,10 @@ function toDoItem(title, dueDate, priority, description) {
     this.description = description
 };
 
+/* 
+each item card should have a mark as complete checkbox and delete button
+*/
+
 function onClickAddItem() {
     //show modal to add item with form to enter data
     const contentDiv = document.getElementById('content');

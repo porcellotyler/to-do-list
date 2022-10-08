@@ -7,6 +7,8 @@ arrange data in various arrays
         all to do items
     project arrays
         to do items associated with specific projects
+
+    maybe instead of using arrays, i could use classes to signify which project a task is associated with*****
     
 or is this best organized using classes/inheritance
     to do item class
