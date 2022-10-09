@@ -1,7 +1,6 @@
-/* 
-add a mark as complete checkbox
-*/
-import { deleteTaskCard } from "./to-do-items";
+//add a mark as complete checkbox
+//import { deleteTaskCard } from "./to-do-items";
+import { deleteTaskCard } from "./lists";
 
 function createMainList(list) {
     for (let i = 0; i < list.length; i++) {
@@ -11,6 +10,9 @@ function createMainList(list) {
             toDoItemCard.classList.add('toDoItemCard');
             display.append(toDoItemCard);
 
+        let itemID = i;
+            list[i].id = itemID;
+    
         let title = document.createElement('div');
             title.setAttribute('class', 'title');
             title.innerText = `${list[i].title}`;
@@ -36,7 +38,7 @@ function createMainList(list) {
             deleteButton.setAttribute('class', `item-${i}`);
             deleteButton.innerText = 'X';
             deleteButton.onclick = () => {
-                deleteTaskCard(`${i}`);
+                deleteTaskCard(i);
                 let deleteLocation = deleteButton.parentNode;
                 display.removeChild(deleteLocation)
             }
