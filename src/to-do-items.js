@@ -5,46 +5,47 @@ function toDoItem(title, dueDate, priority, description) {
     this.dueDate = dueDate
     this.priority = priority
     this.description = description
+    this.list = "mainList"
 };
 
-/* 
-each item card should have a mark as complete checkbox and delete button
-*/
-
 function onClickAddItem() {
-    //show modal to add item with form to enter data
-    const contentDiv = document.getElementById('content');
 
+    const contentDiv = document.getElementById('content');
     const formDiv = document.createElement('div');
-        formDiv.innerHTML = '<input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <input type="text" id="priority" name="priority" value="priority?"/> <input type="text" id="description" name="description" value="description?"/> <button id="create">Create</button>';
-        contentDiv.appendChild(formDiv);
+        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <input type="text" id="priority" name="priority" value="priority?"/> <input type="text" id="description" name="description" value="description?"/> <button id="create">Create</button> </div>';
+        //priority could be a choice between options 1-5
+        formDiv.setAttribute('class', 'modal');
+        contentDiv.prepend(formDiv);
 
     const createButton = document.getElementById('create');
     
     createButton.onclick = function() {
         let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('priority').value), (document.getElementById('description').value),);
 
-        formDiv.innerHTML = '';
+        contentDiv.removeChild(formDiv);
 
-        return addItemToMainList(newToDoItem) //maybe this should be in a separate module later
+        return addItemToMainList(newToDoItem) //maybe this should be in a separate module 
     };
 };
-//main list things should probably end up in index.js
-const mainListDiv = document.createElement("div");
-    mainListDiv.setAttribute('id', 'mainListDiv');
-
-const contentDiv = document.getElementById('content');
-    contentDiv.appendChild(mainListDiv);
 
 let mainToDoList = [];
 
 function addItemToMainList(item) {
-    mainToDoList.push(item);
 
-    let oldDisplay = document.getElementById('mainListDiv');
-        oldDisplay.innerText = '';
-    
-    return createMainList(mainToDoList);
+    /*let oldDisplay = document.getElementById('content');
+        oldDisplay.innerText = ''; */
+
+    if (item.list === "mainList") {
+        mainToDoList.push(item);
+        return createMainList(mainToDoList);
+    } else {
+        return console.log("error in list ID")
+    }
 };
 
+function deleteTaskCard(locationID) {
+    mainToDoList.splice(locationID, 1);
+}
+
 export { onClickAddItem };
+export { deleteTaskCard };
