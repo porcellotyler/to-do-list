@@ -23,7 +23,18 @@ maybe easiest rn to write in one file then split into modules
 */
 
 import { onClickAddItem } from "./to-do-items";
+import { viewAllTasks } from "./lists";
+import { viewTodayTasks } from "./lists";
+import { viewUpcomingTasks } from "./lists";
 
 const addToDoItem = document.getElementById('addButton');
+    addToDoItem.onclick = () => { onClickAddItem() };
 
-addToDoItem.onclick = () => { onClickAddItem() };
+const allTasks = document.getElementById('allTasks');
+    allTasks.onclick = () => { viewAllTasks() };
+
+const todayTasks = document.getElementById('today');
+    todayTasks.onclick = () => { viewTodayTasks() };
+
+const upcomingTasks = document.getElementById('upcoming');
+    upcomingTasks.onclick = () => { viewUpcomingTasks() };

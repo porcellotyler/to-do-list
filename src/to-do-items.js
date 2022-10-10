@@ -1,12 +1,12 @@
 //import { createMainList } from "./DOM";
 import { addItemToMainList } from "./lists";
 
-function toDoItem(title, dueDate, priority, description) {
+function toDoItem(title, dueDate, priority, description, list) {
     this.title = title
     this.dueDate = dueDate
     this.priority = priority
     this.description = description
-    this.list = "mainList"
+    this.list = list
     this.id = ""
 };
 
@@ -14,7 +14,7 @@ function onClickAddItem() {
 
     const contentDiv = document.getElementById('content');
     const formDiv = document.createElement('div');
-        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <input type="text" id="priority" name="priority" value="priority?"/> <input type="text" id="description" name="description" value="description?"/> <button id="create">Create</button> </div>';
+        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <input type="text" id="priority" name="priority" value="priority?"/> <input type="text" id="description" name="description" value="description?"/>  <select name="listID" id="listID"> <option value="">--Please pick a list--</option> <option value="mainList">All tasks</option> <option value="today">Today</option> <option value="upcoming">Upcoming</option> </select> <button id="create">Create</button> </div>';
         //priority could be a choice between options 1-5
         formDiv.setAttribute('class', 'modal');
         contentDiv.prepend(formDiv); //may be unnecessary
@@ -22,9 +22,11 @@ function onClickAddItem() {
     const createButton = document.getElementById('create');
     
     createButton.onclick = function() {
-        let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('priority').value), (document.getElementById('description').value),);
+        let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('priority').value), (document.getElementById('description').value), (document.getElementById('listID').value));
 
         contentDiv.removeChild(formDiv); //may be unnecessary
+
+        //task list destination needs to be set in creation phase and added to post creation phase
 
         return addItemToMainList(newToDoItem) //maybe this should be in a separate module 
     };

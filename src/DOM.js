@@ -1,7 +1,7 @@
 //add a mark as complete checkbox
 //import { deleteTaskCard } from "./to-do-items";
 import { deleteTaskCard } from "./lists";
-
+//this could be renamed to a generic createlist, the input is what determines what list it is, but its all going to the same dom anyways
 function createMainList(list) {
     for (let i = 0; i < list.length; i++) {
         let display = document.getElementById('content');
