@@ -51,6 +51,14 @@
     padding-top: 25px;
 }
 
+#allTasks, #today, #upcoming {
+    border: 5px solid black;
+}
+
+#allTasks:hover, #today:hover, #upcoming:hover {
+    cursor: pointer;
+}
+
 .content {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
