@@ -1,8 +1,9 @@
 //add a mark as complete checkbox
-//import { deleteTaskCard } from "./to-do-items";
+//add list dropdown to each card, changing will change the list its shown on
+
 import { deleteTaskCard } from "./lists";
-//this could be renamed to a generic createlist, the input is what determines what list it is, but its all going to the same dom anyways
-function createMainList(list) {
+
+function createList(list) {
     for (let i = 0; i < list.length; i++) {
         let display = document.getElementById('content');
 
@@ -24,7 +25,7 @@ function createMainList(list) {
             toDoItemCard.append(dueDate);
 
         let priority = document.createElement('div');
-            priority.setAttribute('class', 'priority');
+            priority.setAttribute('class', `priority-${list[i].priority}`);
             priority.innerText = `${list[i].priority}`;
             toDoItemCard.append(priority);
 
@@ -46,4 +47,4 @@ function createMainList(list) {
     };
 };
 
-export { createMainList };
+export { createList };

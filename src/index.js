@@ -1,7 +1,6 @@
 console.log("Hello world");
 
 /*
-
 arrange data in various arrays
     main array
         all to do items
@@ -15,11 +14,6 @@ or is this best organized using classes/inheritance
         shows on homepage
         project classes
             shows in specific project
-
-add mouse event listener for the button - clicking will trigger function to createToDoItem
-
-
-maybe easiest rn to write in one file then split into modules
 */
 
 import { onClickAddItem } from "./to-do-items";
@@ -38,3 +32,6 @@ const todayTasks = document.getElementById('today');
 
 const upcomingTasks = document.getElementById('upcoming');
     upcomingTasks.onclick = () => { viewUpcomingTasks() };
+
+/* const createCustomList = document.getElementById('createList');
+    createCustomList.onclick = () => { }; */

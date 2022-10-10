@@ -1,12 +1,11 @@
-import { createMainList } from "./DOM";
+import { createList } from "./DOM";
 
 let mainToDoList = [];
 let todayList = [];
 let upcomingList = [];
 let garbage = [];
-//could rename below to generic add item to list
 //at this time maybe an item has to be in 1 list only, could refactor in future allowing task to be in multiple lists at the same time
-function addItemToMainList(item) {
+function addItemToList(item) {
     if (item.list === "mainList") {
         mainToDoList.push(item);
 
@@ -14,7 +13,7 @@ function addItemToMainList(item) {
             while(display.firstChild) {
                 display.removeChild(display.firstChild);
             };
-        return createMainList(mainToDoList);
+        return createList(mainToDoList);
     } else if (item.list === 'today') {
         todayList.push(item);
 
@@ -22,7 +21,7 @@ function addItemToMainList(item) {
             while(display.firstChild) {
                 display.removeChild(display.firstChild);
             };
-        return createMainList(todayList);
+        return createList(todayList);
     } else if (item.list === 'upcoming') {
         upcomingList.push(item);
 
@@ -30,7 +29,7 @@ function addItemToMainList(item) {
             while(display.firstChild) {
                 display.removeChild(display.firstChild);
             };
-        return createMainList(upcomingList);
+        return createList(upcomingList);
     } else if (item.list === 'garbage') {
         garbage.push(item);
     } else {
@@ -55,7 +54,7 @@ function viewAllTasks() {
             display.removeChild(display.firstChild);
         };
 
-    createMainList(mainToDoList);
+    createList(mainToDoList);
 };
 
 function viewTodayTasks() {
@@ -64,7 +63,7 @@ function viewTodayTasks() {
             display.removeChild(display.firstChild);
         };
 
-    createMainList(todayList);
+    createList(todayList);
 };
 
 function viewUpcomingTasks() {
@@ -73,11 +72,32 @@ function viewUpcomingTasks() {
             display.removeChild(display.firstChild);
         };
 
-    createMainList(upcomingList);
+    createList(upcomingList);
 };
+//still need to create form to get input for custom array
+/* function customListMaker(name) {
+    function customArray(name, contents) {
+        this.name = name;
+        this.contents = [];
+        this.listID = name;
+    };
+
+    let newList = new customArray(name, []);
+        console.log(newList);
+    //add custom list to options in creating task card
+    //create task card list id for tracking - how to get custom name into addItemToList logic so browser knows where to place item? 
+    
+    let customArrayDiv = document.createElement('div');
+        customArrayDiv.setAttribute('class', 'customArray');
+        customArrayDiv.innerText = `${name}`;
+        
+    let upcomingDiv = document.getElementById('upcoming');
+        upcomingDiv.append(customArrayDiv);
+}; */
 
 export { viewAllTasks };
 export { viewTodayTasks };
 export { viewUpcomingTasks };
-export { addItemToMainList };
+//export { customListMaker };
+export { addItemToList };
 export { deleteTaskCard };

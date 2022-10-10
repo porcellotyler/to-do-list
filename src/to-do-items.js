@@ -1,5 +1,4 @@
-//import { createMainList } from "./DOM";
-import { addItemToMainList } from "./lists";
+import { addItemToList } from "./lists";
 
 function toDoItem(title, dueDate, priority, description, list) {
     this.title = title
@@ -14,42 +13,22 @@ function onClickAddItem() {
 
     const contentDiv = document.getElementById('content');
     const formDiv = document.createElement('div');
-        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <input type="text" id="priority" name="priority" value="priority?"/> <input type="text" id="description" name="description" value="description?"/>  <select name="listID" id="listID"> <option value="">--Please pick a list--</option> <option value="mainList">All tasks</option> <option value="today">Today</option> <option value="upcoming">Upcoming</option> </select> <button id="create">Create</button> </div>';
-        //priority could be a choice between options 1-5
+        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <select name="prioritySelect" id="prioritySelect"> <option value="">--Set Priority--</option> <option value="low">Low</option> <option value="mid">Mid</option> <option value="high">High</option> </select> <input type="text" id="description" name="description" value="description?"/>  <select name="listID" id="listID"> <option value="">--Pick a list--</option> <option value="mainList">All tasks</option> <option value="today">Today</option> <option value="upcoming">Upcoming</option> </select> <button id="create">Create</button> </div>';
+        
         formDiv.setAttribute('class', 'modal');
         contentDiv.prepend(formDiv); //may be unnecessary
 
     const createButton = document.getElementById('create');
     
     createButton.onclick = function() {
-        let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('priority').value), (document.getElementById('description').value), (document.getElementById('listID').value));
+        let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('prioritySelect').value), (document.getElementById('description').value), (document.getElementById('listID').value));
 
         contentDiv.removeChild(formDiv); //may be unnecessary
 
-        //task list destination needs to be set in creation phase and added to post creation phase
+        //task list needs to be added to post creation phase
 
-        return addItemToMainList(newToDoItem) //maybe this should be in a separate module 
+        return addItemToList(newToDoItem) 
     };
 };
 
-/*let mainToDoList = [];
-
-function addItemToMainList(item) {
-
-    /*let oldDisplay = document.getElementById('content');
-        oldDisplay.innerText = '';
-
-    if (item.list === "mainList") {
-        mainToDoList.push(item);
-        return createMainList(mainToDoList);
-    } else {
-        return console.log("error in list ID")
-    }
-};
-
-function deleteTaskCard(locationID) {
-    mainToDoList.splice(locationID, 1);
-} */
-
 export { onClickAddItem };
-//export { deleteTaskCard };

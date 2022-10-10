@@ -43,6 +43,10 @@
     cursor: pointer;
 }
 
+button:hover {
+    box-shadow: 0px 0px 5px #0c4a6e;
+}
+
 .sidebar {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
@@ -51,11 +55,17 @@
     padding-top: 25px;
 }
 
-#allTasks, #today, #upcoming {
-    border: 5px solid black;
+.sidebar > div > img {
+    height: 20px;
+    width: auto;
 }
 
-#allTasks:hover, #today:hover, #upcoming:hover {
+/*
+#allTasks, #today, #upcoming, #createList {
+    border: 5px solid black;
+} */
+
+#allTasks:hover, #today:hover, #upcoming:hover, #createList:hover {
     cursor: pointer;
 }
 
@@ -73,7 +83,6 @@
 }
 
 .toDoItemCard {
-    background-color: #7dd3fc;
     height: 250px;
     width: 250px;
     border-radius: 20px;
@@ -82,7 +91,19 @@
     grid-template-rows: 25px 75px 150px;
 }
 
-.priority {
+.toDoItemCard:has([class^='priority-high']) {
+    background-color: #0c4a6e;
+}
+
+.toDoItemCard:has([class^='priority-mid']) {
+    background-color: #0284c7;
+}
+
+.toDoItemCard:has([class^='priority-low']) {
+    background-color: #7dd3fc;
+}
+
+[class^='priority'] {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     text-align: center;
