@@ -43,41 +43,9 @@ function addItemToList(item) {
     };
 };
 //at this time an item has to be in 1 list only, could refactor in future allowing task to be in multiple lists at the same time
-/*function addItemToList(item) {
-    if (item.list === "mainList") {
-        mainToDoList.push(item);
-
-        let display = document.getElementById('content');
-            while(display.firstChild) {
-                display.removeChild(display.firstChild);
-            };
-        return createList(mainToDoList);
-    } else if (item.list === 'today') {
-        todayList.push(item);
-
-        let display = document.getElementById('content');
-            while(display.firstChild) {
-                display.removeChild(display.firstChild);
-            };
-        return createList(todayList);
-    } else if (item.list === 'upcoming') {
-        upcomingList.push(item);
-
-        let display = document.getElementById('content');
-            while(display.firstChild) {
-                display.removeChild(display.firstChild);
-            };
-        return createList(upcomingList);
-    } else if (item.list === 'garbage') {
-        garbage.push(item);
-    } else {
-        console.log("error in list ID");
-        return
-    }
-}; */
 
 function deleteTaskCard(locationID) {
-    //unsure of my previous thinking here but this needs to be updated to function for all lists included custom added lists
+    //needs to be updated to function for all lists included custom added lists - currently the card is removed from the DOM in DOM.js, but when you click on the title of the list again, the card reappears as the list is reloaded
     let targetCard = mainToDoList.filter(item => item.id === locationID); 
 
     mainToDoList = mainToDoList.filter(item => item.id !== locationID);
@@ -116,6 +84,25 @@ function viewUpcomingTasks() {
 
 //still need to create form to get input for custom array
 
+function enterCustomName() {
+    const contentDiv = document.getElementById('content');
+    const formDiv = document.createElement('div');
+        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="customName" name="customName" value="Name of Custom List"/> <button id="addNewList">Create List</button> </div>'; 
+
+        formDiv.setAttribute('class', 'modal');
+        contentDiv.prepend(formDiv);
+
+    const addNewList = document.getElementById('addNewList');
+
+    addNewList.onclick = function() {
+        let customName = document.getElementById('customName').value;
+
+        contentDiv.removeChild(formDiv);
+
+        return customListMaker(customName);    
+    };
+};
+
 function customListMaker(name) {
     name = new Array(name);
 
@@ -124,18 +111,22 @@ function customListMaker(name) {
     let customArrayDiv = document.createElement('div');
         customArrayDiv.setAttribute('class', 'customArray');
         customArrayDiv.innerText = `${name}`;
-        
+
+    let customListImage = document.createElement("img");
+        customListImage["src"] = '/img/customList.svg';
+        customArrayDiv.prepend(customListImage);
+
     let upcomingDiv = document.getElementById('upcoming');
         upcomingDiv.append(customArrayDiv);
 
     //add custom list to options in creating task card
-    //maybe remove list selection from task card creation - all new cards auto added to all tasks - then the user can choose another list from the card itself - not sure if this solves the problem
     
 };
 
 export { viewAllTasks };
 export { viewTodayTasks };
 export { viewUpcomingTasks };
+export { enterCustomName };
 export { customListMaker };
 export { addItemToList };
 export { deleteTaskCard };

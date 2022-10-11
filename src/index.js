@@ -17,6 +17,7 @@ import { onClickAddItem } from "./to-do-items";
 import { viewAllTasks } from "./lists";
 import { viewTodayTasks } from "./lists";
 import { viewUpcomingTasks } from "./lists";
+import { enterCustomName } from "./lists";
 
 const addToDoItem = document.getElementById('addButton');
     addToDoItem.onclick = () => { onClickAddItem() };
@@ -30,5 +31,5 @@ const todayTasks = document.getElementById('today');
 const upcomingTasks = document.getElementById('upcoming');
     upcomingTasks.onclick = () => { viewUpcomingTasks() };
 
-/* const createCustomList = document.getElementById('createList');
-    createCustomList.onclick = () => { }; */
+const createCustomList = document.getElementById('createList');
+    createCustomList.onclick = () => { enterCustomName() };
