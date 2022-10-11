@@ -1,7 +1,4 @@
-console.log("Hello world");
-
-/*
-arrange data in various arrays
+/* arrange data in various arrays
     main array
         all to do items
     project arrays

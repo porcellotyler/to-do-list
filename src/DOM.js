@@ -4,7 +4,7 @@
 import { deleteTaskCard } from "./lists";
 
 function createList(list) {
-    for (let i = 0; i < list.length; i++) {
+    for (let i = 1; i < list.length; i++) { //set i to 1 because the first item in each array is the name of the list (which is a string and isn't meant to post on the DOM)
         let display = document.getElementById('content');
 
         let toDoItemCard = document.createElement('div');
