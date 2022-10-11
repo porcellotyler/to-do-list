@@ -55,7 +55,13 @@ button:hover {
     padding-top: 25px;
 }
 
-.sidebar > div > img {
+/* this wasnt working for customListImage for some reason - not sure rn but could look into later if more images are needed on the page
+.sidebar > div > img { 
+    height: 20px;
+    width: auto;
+} */
+
+img {
     height: 20px;
     width: auto;
 }
