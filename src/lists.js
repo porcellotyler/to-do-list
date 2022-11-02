@@ -44,15 +44,19 @@ function addItemToList(item) {
 };
 //at this time an item has to be in 1 list only, could refactor in future allowing task to be in multiple lists at the same time
 
-function deleteTaskCard(locationID) {
-    //needs to be updated to function for all lists included custom added lists - currently the card is removed from the DOM in DOM.js, but when you click on the title of the list again, the card reappears as the list is reloaded
-    let targetCard = mainToDoList.filter(item => item.id === locationID); 
+function deleteTaskCard(locationID, listID) {
+    for (let i = 0; i < parentList.length; i++) {
+        if (parentList[i].includes(listID)) {
 
-    mainToDoList = mainToDoList.filter(item => item.id !== locationID);
+            let targetCard = parentList[i].filter(item => item.id === locationID); 
 
-    targetCard.list = 'garbage';
-    garbage.push(targetCard);
-}
+            parentList[i].splice(locationID, 1);
+
+            targetCard.list = 'garbage';
+            garbage.push(targetCard);
+        };
+    };
+};
 
 //maybe need to refactor below to loop through parentList and display chosen list instead of hard coding - need to be able to display custom lists as well
 function viewAllTasks() {

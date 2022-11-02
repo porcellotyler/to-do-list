@@ -39,7 +39,7 @@ function createList(list) {
             deleteButton.setAttribute('class', `item-${i}`);
             deleteButton.innerText = 'X';
             deleteButton.onclick = () => {
-                deleteTaskCard(i);
+                deleteTaskCard(i, list[i].list);
                 let deleteLocation = deleteButton.parentNode;
                 display.removeChild(deleteLocation)
             }
