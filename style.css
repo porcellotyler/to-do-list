@@ -55,6 +55,10 @@ button:hover {
     padding-top: 25px;
 }
 
+.sidebar > div {
+    margin-top: 15px;
+}
+
 /* this wasnt working for customListImage for some reason - not sure rn but could look into later if more images are needed on the page
 .sidebar > div > img { 
     height: 20px;
@@ -92,49 +96,59 @@ img {
     height: 250px;
     width: 250px;
     border-radius: 20px;
+    padding-top: 15px;
     display: grid;
     grid-template-columns: 50px 150px 50px ;
-    grid-template-rows: 25px 75px 150px;
+    grid-template-rows: 12px 13px 75px 150px;
 }
 
 .toDoItemCard:has([class^='priority-high']) {
     background-color: #0c4a6e;
+    box-shadow: 5px 0px #eab308;
 }
 
 .toDoItemCard:has([class^='priority-mid']) {
     background-color: #0284c7;
+    box-shadow: 5px 0px #eab308;
 }
 
 .toDoItemCard:has([class^='priority-low']) {
     background-color: #7dd3fc;
+    box-shadow: 5px 0px #eab308;
 }
 
 [class^='priority'] {
     grid-column: 1 / 2;
-    grid-row: 1 / 2;
+    grid-row: 2 / 3;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 5px;
     padding-left: 10px;
+}
+
+.checkbox {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin-left: 10px;
 }
 
 .title {
     grid-column: 1 / 4;
-    grid-row: 2 / 3;
+    grid-row: 3 / 4;
     text-align: center;
     padding-top: 20px;
 }
 
 .dueDate {
     grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-row: 1 / 3;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 #deleteButton {
     grid-column: 3 / 4;
-    grid-row: 1 / 2;
-    margin-top: 20px;
+    grid-row: 1 / 3;
+    margin-top: 5px;
     margin-right: 10px;
     width: 20px;
     height: 20px;
@@ -148,7 +162,7 @@ img {
 
 .description {
     grid-column: 1 / 4;
-    grid-row: 3 / 4;
+    grid-row: 4 / 5;
     text-align: center;
     padding-top: 20px;
 }
