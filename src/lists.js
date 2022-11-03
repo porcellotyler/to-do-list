@@ -9,18 +9,6 @@ let garbage = ["garbage"];
 let parentList = [];
     parentList.push(mainToDoList, todayList, upcomingList, garbage);
 
-/*
-ok so...
-could create parentList array of all lists
-    when user creates custom array, that gets spliced into "parentList" array of all arrays
-
-    then, for the addItemToList fn below...
-        instead of explicitly checking for item.list to === "mainList" (for example)
-        we can check by calling on the "parentList" array
-        so to check for mainList instead of calling it specifically we could do item.list === parentList[0] and loop through all of "parentList" array (except garbage?)
-*/
-
-
 function addItemToList(item) {
     for (let i = 0; i < parentList.length; i++) {
         if (item.list == ((parentList[i])[0])) {
@@ -42,7 +30,6 @@ function addItemToList(item) {
         };
     };
 };
-//at this time an item has to be in 1 list only, could refactor in future allowing task to be in multiple lists at the same time
 
 function deleteTaskCard(locationID, listID) {
     for (let i = 0; i < parentList.length; i++) {
@@ -86,8 +73,6 @@ function viewUpcomingTasks() {
     createList(upcomingList);
 };
 
-//still need to create form to get input for custom array
-
 function enterCustomName() {
     const contentDiv = document.getElementById('content');
     const formDiv = document.createElement('div');
@@ -121,10 +106,7 @@ function customListMaker(name) {
         customArrayDiv.prepend(customListImage);
 
     let upcomingDiv = document.getElementById('upcoming');
-        upcomingDiv.append(customArrayDiv);
-
-    //add custom list to options in creating task card
-    
+        upcomingDiv.append(customArrayDiv);    
 };
 
 export { viewAllTasks };

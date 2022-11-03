@@ -25,9 +25,6 @@ function onClickAddItem() {
             
         contentDiv.removeChild(formDiv);
 
-        //task list needs to be added to post creation phase
-        //maybe remove list selection from task card creation - all new cards auto added to all tasks - then the user can choose another list from the card itself - not sure if this solves the problem
-
         return addItemToList(newToDoItem) 
     };
 };

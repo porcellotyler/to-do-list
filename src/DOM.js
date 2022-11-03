@@ -1,6 +1,3 @@
-//add a mark as complete checkbox
-//add list dropdown to each card, changing will change the list its shown on
-
 import { deleteTaskCard } from "./lists";
 
 function createList(list) {
@@ -28,6 +25,15 @@ function createList(list) {
             priority.setAttribute('class', `priority-${list[i].priority}`);
             priority.innerText = `${list[i].priority}`;
             toDoItemCard.append(priority);
+
+        let checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.setAttribute('class', 'checkbox')
+        /*let checkboxDiv = document.createElement('div');
+            checkboxDiv.innerText = 'Done?';
+            checkboxDiv.append(checkbox);
+            checkboxDiv.setAttribute('class', 'checkbox');*/
+            toDoItemCard.append(checkbox);
 
         let description = document.createElement('div');
             description.setAttribute('class', 'description');

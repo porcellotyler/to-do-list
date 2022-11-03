@@ -1,16 +1,24 @@
-/* arrange data in various arrays
-    main array
-        all to do items
-    project arrays
-        to do items associated with specific projects
+/* 
+to do
 
-    maybe instead of using arrays, i could use classes to signify which project a task is associated with*****
-    
-or is this best organized using classes/inheritance
-    to do item class
-        shows on homepage
-        project classes
-            shows in specific project
+- make all todo items really show all items from all lists
+
+- add editability to to-do task cards
+
+- add date-fns library to webpack to fix the due date functionality
+
+- refactor onClickAddItem in to-do-items so that custom lists are included
+
+- make sure that custom lists include their name as the first item in their arrays so that items are correctly placed
+
+- refactor view tasks functions in lists to work for custom lists as well
+
+- add localStorage
+
+- add ability to move card from one list to another after creation - nice but not necessary
+    had an idea to add list selection as only allowed to pick after the item is created , not sure if this helps or not tho
+
+
 */
 
 import { onClickAddItem } from "./to-do-items";
