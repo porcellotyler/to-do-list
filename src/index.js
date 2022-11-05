@@ -3,9 +3,7 @@ to do
 
 *** add date-fns library to webpack to fix the due date functionality
 
-*** refactor onClickAddItem in to-do-items so that custom lists are included -- or -- change so that all new to do tasks are added to allTasksList, from there let user select the sub-list for each task to be added to
-
-- make sure that custom lists include their name as the first item in their arrays so that items are correctly placed
+*** refactor onClickAddItem in to-do-items so all new to do tasks are added to allTasksList - lines 16 & 24, add save button line 73 in DOM so when user picks a list, it will update
 
 *** add localStorage
 

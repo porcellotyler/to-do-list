@@ -1,5 +1,11 @@
 import { deleteTaskCard } from "./lists";
 
+let listOptions = ['today', 'upcoming']
+
+function updateCardListOptions(newOption) {
+    listOptions.push(newOption);
+};
+
 function createList(list) {
     for (let i = 1; i < list.length; i++) { //set i to 1 because the first item in each array is the name of the list (which is a string and isn't meant to post on the DOM)
         let display = document.getElementById('content');
@@ -51,6 +57,21 @@ function createList(list) {
             description.setAttribute('contenteditable', true);
             toDoItemCard.append(description);
 
+        let listSelector = document.createElement('select');
+            listSelector.name = 'listID';
+            listSelector.id = 'listID';
+            for (const list of listOptions) {
+                var option = document.createElement("option");
+                option.value = list;
+                option.text = list;
+                listSelector.appendChild(option);
+            };
+        
+        let label = document.createElement('label');
+            label.innerText = 'List:';
+            label.htmlFor = 'listID';
+        toDoItemCard.appendChild(label).appendChild(listSelector); //add a save button so that when a user picks the list, the lists and cards are updated
+
         if (list[0] != 'allTasksList') {
             let deleteButton = document.createElement('button');
                 deleteButton.setAttribute('id', 'deleteButton');
@@ -61,10 +82,10 @@ function createList(list) {
                 let deleteLocation = deleteButton.parentNode;
                 display.removeChild(deleteLocation)
                 };
-
             toDoItemCard.append(deleteButton); 
         }; //not showing a delete card button on the allTasksList because im having trouble getting it to work bug-free
     };
 };
 
+export { updateCardListOptions };
 export { createList };

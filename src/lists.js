@@ -1,4 +1,5 @@
 import { createList } from "./DOM";
+import { updateCardListOptions } from "./DOM";
 const _ = require('lodash');
 
 let mainToDoList = ["allTasksList"];
@@ -11,7 +12,7 @@ let parentList = [];
     parentList.push(mainToDoList, todayList, upcomingList, garbage);
 
 function addItemToList(item) {
-    if (item.list != 'garbage' && item.list != 'allTasksList') { mainToDoList.push(item) };
+    if (item.list != 'garbage' && item.list != 'allTasksList') { mainToDoList.push(item) }; //would remove this bit i think
     
     for (let i = 0; i < parentList.length; i++) {
         if (item.list == ((parentList[i])[0])) {
@@ -85,18 +86,20 @@ function enterCustomName() {
 
         contentDiv.removeChild(formDiv);
 
-        return customListMaker(customName);    
+        return customListMaker(customName), updateCardListOptions(customName);    
     };
 };
 
 function customListMaker(name) {
     name = new Array(name);
-
-    parentList.push(name);
-    
+        
     let customArrayDiv = document.createElement('div');
         customArrayDiv.setAttribute('class', 'customArray');
         customArrayDiv.innerText = `${name}`;
+
+    name[0] = `${name + 'List'}`;
+
+    parentList.push(name);
 
     let customListImage = document.createElement("img");
         customListImage["src"] = '/img/customList.svg';
