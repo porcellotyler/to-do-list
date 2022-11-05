@@ -40,16 +40,19 @@ function createList(list) {
             description.innerText = `${list[i].description}`;
             toDoItemCard.append(description);
 
-        let deleteButton = document.createElement('button');
-            deleteButton.setAttribute('id', 'deleteButton');
-            deleteButton.setAttribute('class', `item-${i}`);
-            deleteButton.innerText = 'X';
+        if (list[0] != 'allTasksList') {
+            let deleteButton = document.createElement('button');
+                deleteButton.setAttribute('id', 'deleteButton');
+                deleteButton.setAttribute('class', `item-${i}`);
+                deleteButton.innerText = 'X';
             deleteButton.onclick = () => {
                 deleteTaskCard(i, list[i].list);
                 let deleteLocation = deleteButton.parentNode;
                 display.removeChild(deleteLocation)
-            }
-            toDoItemCard.append(deleteButton);
+                };
+
+            toDoItemCard.append(deleteButton); 
+        }; //not showing a delete card button on the allTasksList because im having trouble getting it to work bug-free
     };
 };
 

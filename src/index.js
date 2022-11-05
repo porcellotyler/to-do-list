@@ -1,8 +1,6 @@
 /* 
 to do
 
-*** make all todo items really show all items from all lists
-
 *** add editability to to-do task cards
 
 *** add date-fns library to webpack to fix the due date functionality
