@@ -1,6 +1,7 @@
 import { createList } from "./DOM";
+const _ = require('lodash');
 
-let mainToDoList = ["mainToDoList"];
+let mainToDoList = ["allTasksList"];
 let todayList = ["todayList"];
 let upcomingList = ["upcomingList"];
 let garbage = ["garbage"];
@@ -12,7 +13,6 @@ let parentList = [];
 function addItemToList(item) {
     for (let i = 0; i < parentList.length; i++) {
         if (item.list == ((parentList[i])[0])) {
-
             parentList[i].push(item);
             
             let display = document.getElementById('content');
@@ -24,9 +24,7 @@ function addItemToList(item) {
             createList(parentList[i]);
 
         } else if (item.list === 'garbage') {
-            
             garbage.push(item);
-        
         };
     };
 };
@@ -45,32 +43,21 @@ function deleteTaskCard(locationID, listID) {
     };
 };
 
-//maybe need to refactor below to loop through parentList and display chosen list instead of hard coding - need to be able to display custom lists as well
-function viewAllTasks() {
+function viewList(list) {
+    //camelCasing list so that it can be used to identify the appropriate array
+    
+    let camelList = _.camelCase(list).concat('List');
+
     let display = document.getElementById('content');
         while(display.firstChild) {
             display.removeChild(display.firstChild);
         };
 
-    createList(mainToDoList);
-};
-
-function viewTodayTasks() {
-    let display = document.getElementById('content');
-        while(display.firstChild) {
-            display.removeChild(display.firstChild);
+    for (let i = 0; i < parentList.length; i++) {
+        if (parentList[i].includes(camelList)) {
+            createList(parentList[i]);
         };
-
-    createList(todayList);
-};
-
-function viewUpcomingTasks() {
-    let display = document.getElementById('content');
-        while(display.firstChild) {
-            display.removeChild(display.firstChild);
-        };
-
-    createList(upcomingList);
+    };
 };
 
 function enterCustomName() {
@@ -105,13 +92,12 @@ function customListMaker(name) {
         customListImage["src"] = '/img/customList.svg';
         customArrayDiv.prepend(customListImage);
 
-    let upcomingDiv = document.getElementById('upcoming');
-        upcomingDiv.append(customArrayDiv);    
+    let createListDiv = document.getElementById('createList');
+    let sidebarDiv = document.getElementById('sidebar');
+        sidebarDiv.insertBefore(customArrayDiv, createListDiv);
 };
 
-export { viewAllTasks };
-export { viewTodayTasks };
-export { viewUpcomingTasks };
+export { viewList };
 export { enterCustomName };
 export { customListMaker };
 export { addItemToList };
