@@ -11,11 +11,7 @@ let parentList = [];
     parentList.push(mainToDoList, todayList, upcomingList, garbage);
 
 function addItemToList(item) {
-    if (item.list != 'garbage' && item.list != 'allTasksList') {
-
-        mainToDoList.push(item)
-    
-    };
+    if (item.list != 'garbage' && item.list != 'allTasksList') { mainToDoList.push(item) };
     
     for (let i = 0; i < parentList.length; i++) {
         if (item.list == ((parentList[i])[0])) {
@@ -23,9 +19,7 @@ function addItemToList(item) {
             
             let display = document.getElementById('content');
         
-            while(display.firstChild) {
-                display.removeChild(display.firstChild);
-            };
+            while(display.firstChild) { display.removeChild(display.firstChild); };
 
             createList(parentList[i]);
 
@@ -37,15 +31,14 @@ function addItemToList(item) {
 
 function deleteTaskCard(locationID, listID) {
 
-        let mainListTargetCard = mainToDoList.filter(item => (item.id === locationID && item.list === listID));
+    let mainListTargetCard = mainToDoList.filter(item => (item.id === locationID && item.list === listID));
 
-        let deletionIndex = mainToDoList.findIndex(card => (card.list == listID && card.id == locationID));
+    let deletionIndex = mainToDoList.findIndex(card => (card.list == listID && card.id == locationID));
 
-        mainToDoList.splice(deletionIndex, 1); 
+    mainToDoList.splice(deletionIndex, 1); 
     
-        mainListTargetCard.list = 'garbage';
-        garbage.push(mainListTargetCard);
-    //maybe no deletion from allTasks list
+    mainListTargetCard.list = 'garbage';
+    garbage.push(mainListTargetCard);
 
     for (let i = 0; i < parentList.length; i++) {
         if (parentList[i].includes(listID)) {

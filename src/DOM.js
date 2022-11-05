@@ -14,16 +14,26 @@ function createList(list) {
         let title = document.createElement('div');
             title.setAttribute('class', 'title');
             title.innerText = `${list[i].title}`;
+            title.setAttribute('contenteditable', true);
             toDoItemCard.append(title);
 
         let dueDate = document.createElement('div');
             dueDate.setAttribute('class', 'dueDate');
             dueDate.innerText = `Due: ${list[i].dueDate}`;
+            dueDate.setAttribute('contenteditable', true);
             toDoItemCard.append(dueDate);
 
         let priority = document.createElement('div');
             priority.setAttribute('class', `priority-${list[i].priority}`);
-            priority.innerText = `${list[i].priority}`;
+            if (list[i].priority == 'high') {
+                priority.innerText = '🌕';
+            } else if (list[i].priority == 'mid') {
+                priority.innerText = '🌓';
+            } else if (list[i].priority == 'low') {
+                priority.innerText = '🌑';
+            } else {
+                priority.innerText = '😶‍🌫️';
+            };
             toDoItemCard.append(priority);
 
         let checkbox = document.createElement('input');
@@ -38,6 +48,7 @@ function createList(list) {
         let description = document.createElement('div');
             description.setAttribute('class', 'description');
             description.innerText = `${list[i].description}`;
+            description.setAttribute('contenteditable', true);
             toDoItemCard.append(description);
 
         if (list[0] != 'allTasksList') {

@@ -1,11 +1,9 @@
 /* 
 to do
 
-*** add editability to to-do task cards
-
 *** add date-fns library to webpack to fix the due date functionality
 
-*** refactor onClickAddItem in to-do-items so that custom lists are included
+*** refactor onClickAddItem in to-do-items so that custom lists are included -- or -- change so that all new to do tasks are added to allTasksList, from there let user select the sub-list for each task to be added to
 
 - make sure that custom lists include their name as the first item in their arrays so that items are correctly placed
 
