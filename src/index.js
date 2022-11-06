@@ -3,8 +3,6 @@ to do
 
 *** remember to remove dev mode and source maps from webpack config before publishing on github
 
-*** add date-fns library to webpack to fix the due date functionality
-
 *** add localStorage
 
 - add ability to move card from one list to another after creation - nice but not necessary

@@ -1,4 +1,5 @@
 import { addItemToList } from "./lists";
+import { format, parseISO } from 'date-fns';
 
 function toDoItem(title, dueDate, priority, description, list) {
     this.title = title
@@ -21,8 +22,8 @@ function onClickAddItem() {
     const createButton = document.getElementById('create');
     
     createButton.onclick = function() {
-        let newToDoItem = new toDoItem((document.getElementById('title').value), (document.getElementById('dueDate').value), (document.getElementById('prioritySelect').value), (document.getElementById('description').value), /*(document.getElementById('listID').value)*/'allTasksList'); //last entry would be allTasksList no matter what and dropdown in formDiv would be removed to make all items auto in allTasksList
-            
+        let newToDoItem = new toDoItem((document.getElementById('title').value), format(parseISO(document.getElementById('dueDate').value), 'Pp'), (document.getElementById('prioritySelect').value), (document.getElementById('description').value), 'allTasksList');     
+
         contentDiv.removeChild(formDiv);
 
         return addItemToList(newToDoItem) 
