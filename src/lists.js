@@ -32,6 +32,7 @@ function addItemToList(item) {
 
 function deleteTaskCard(locationID, listID) {
 
+    if (listID != 'allTasksList') {
     let mainListTargetCard = mainToDoList.filter(item => (item.id === locationID && item.list === listID));
 
     let deletionIndex = mainToDoList.findIndex(card => (card.list == listID && card.id == locationID));
@@ -40,6 +41,7 @@ function deleteTaskCard(locationID, listID) {
     
     mainListTargetCard.list = 'garbage';
     garbage.push(mainListTargetCard);
+    };
 
     for (let i = 0; i < parentList.length; i++) {
         if (parentList[i].includes(listID)) {

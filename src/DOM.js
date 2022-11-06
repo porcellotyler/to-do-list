@@ -1,4 +1,4 @@
-import { deleteTaskCard } from "./lists";
+import { addItemToList, deleteTaskCard } from "./lists";
 
 let listOptions = ['today', 'upcoming']
 
@@ -58,8 +58,8 @@ function createList(list) {
             toDoItemCard.append(description);
 
         let listSelector = document.createElement('select');
-            listSelector.name = 'listID';
-            listSelector.id = 'listID';
+            listSelector.name = 'listOptions';
+            listSelector.id = 'listOptions';
             for (const list of listOptions) {
                 var option = document.createElement("option");
                 option.value = list;
@@ -69,8 +69,23 @@ function createList(list) {
         
         let label = document.createElement('label');
             label.innerText = 'List:';
-            label.htmlFor = 'listID';
-        toDoItemCard.appendChild(label).appendChild(listSelector); //add a save button so that when a user picks the list, the lists and cards are updated
+            label.htmlFor = 'listOptions';
+        toDoItemCard.appendChild(label).appendChild(listSelector);
+
+        let firstList = list[i].list; //storing original list so that list can change below and still point to delete a card from the correct list after changing lists
+
+        let saveButton = document.createElement('button');
+            saveButton.setAttribute('id', 'saveButton');
+            saveButton.setAttribute('class', `item-${i}`);
+            saveButton.innerText = 'Save';
+            saveButton.onclick = () => {
+                
+                list[i].list = `${listSelector.options[listSelector.selectedIndex].text + 'List'}`;
+
+                addItemToList(list[i]);
+                deleteTaskCard(i, firstList);
+            };
+        toDoItemCard.append(saveButton);
 
         if (list[0] != 'allTasksList') {
             let deleteButton = document.createElement('button');
@@ -83,7 +98,7 @@ function createList(list) {
                 display.removeChild(deleteLocation)
                 };
             toDoItemCard.append(deleteButton); 
-        }; //not showing a delete card button on the allTasksList because im having trouble getting it to work bug-free
+        }; //not showing delete button on allTasksList because im having trouble getting it to work bug-free
     };
 };
 

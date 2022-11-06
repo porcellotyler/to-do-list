@@ -1,9 +1,9 @@
 /* 
 to do
 
-*** add date-fns library to webpack to fix the due date functionality
+*** remember to remove dev mode and source maps from webpack config before publishing on github
 
-*** refactor onClickAddItem in to-do-items so all new to do tasks are added to allTasksList - lines 16 & 24, add save button line 73 in DOM so when user picks a list, it will update
+*** add date-fns library to webpack to fix the due date functionality
 
 *** add localStorage
 
