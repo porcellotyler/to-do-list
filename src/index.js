@@ -3,10 +3,9 @@ to do
 
 *** remember to remove dev mode and source maps from webpack config before publishing on github
 
-*** add localStorage
+*** add localStorage - add a function that looks for that data in localStorage when your app is first loaded.
 
-- add ability to move card from one list to another after creation - nice but not necessary
-    had an idea to add list selection as only allowed to pick after the item is created , not sure if this helps or not tho
+maybe its a lot simpler than im making it out to be
 
 - make to do items collapsible, nice to have
 */
@@ -29,3 +28,26 @@ const sidebar = document.getElementById('sidebar');
             viewList(e.target.innerText);
         };
     };
+/*
+if (!localStorage.getItem('message')) {
+    addToStorage();
+} else {
+    setStyles();
+};
+
+function setStyles() {
+    let myMessage = localStorage.getItem('message');
+    
+    myMessage = 'Hello World!';
+
+    //localStorage.setItem('message', myMessage);
+
+    console.log(myMessage);
+    console.log(localStorage.getItem('message'));
+};
+
+function addToStorage() {
+    localStorage.setItem('message', 'populate');
+
+    setStyles();
+} */

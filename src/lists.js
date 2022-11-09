@@ -1,27 +1,89 @@
 import { createList } from "./DOM";
 import { updateCardListOptions } from "./DOM";
 const _ = require('lodash');
-
-let mainToDoList = ["allTasksList"];
+/*
+let allTasksList = ["allTasksList"];
 let todayList = ["todayList"];
 let upcomingList = ["upcomingList"];
 let garbage = ["garbage"];
-    //adding the name of the list as the first item in each array so the addItemToList function knows what to point to
+//adding the name of the list as the first item in each array so the addItemToList function knows what to point to
 
 let parentList = [];
-    parentList.push(mainToDoList, todayList, upcomingList, garbage);
+    parentList.push(allTasksList, todayList, upcomingList, garbage);
 
-function addItemToList(item) {
-    if (item.list != 'garbage' && item.list != 'allTasksList') { mainToDoList.push(item) }; //would remove this bit i think
+//let parentList = JSON.parse(localStorage.getItem('parentList')) || [];
+//parentList.push(JSON.parse(localStorage.getItem('parentList')));
+//localStorage.setItem('parentList', JSON.stringify(parentList));
+//parentList.splice(0, 1); //addressing index 0 object being null rn
+//parentList.push(allTasksList, todayList, upcomingList, garbage);
+
+//localStorage.setItem('parentList', JSON.stringify(parentList));
+
+//parentList = JSON.parse(localStorage.getItem('parentList'));
+
+//let parentList = localStorage.setItem('parentList', JSON.stringify([`${allTasksList}, ${todayList}, ${upcomingList}, ${garbage}`]));
+//consider custom lists, may need to adjust this
+//localStorage.setItem('parentList', JSON.stringify(parentList)); */
+
+if (!localStorage.getItem("parentList")) {
+    populateStorage();
+} else {
+   // getLists(); 
+};
+
+function populateStorage() {
+    localStorage.setItem("parentList", JSON.stringify([]));
+
+    localStorage.setItem("allTasksList", JSON.stringify(["allTasksList"]));
+
+    localStorage.setItem("todayList", JSON.stringify(["todayList"]));
+
+    localStorage.setItem("upcomingList", JSON.stringify(["upcomingList"]));
+
+    localStorage.setItem("garbage", JSON.stringify(["garbage"]));
+};
+
+let parentList = JSON.parse(localStorage.getItem("parentList")); 
+let allTasksList = JSON.parse(localStorage.getItem("allTasksList"));
+let todayList = JSON.parse(localStorage.getItem("todayList"));
+let upcomingList = JSON.parse(localStorage.getItem("upcomingList"));
+let garbage = JSON.parse(localStorage.getItem("garbage"));
+
+if (parentList != null) {
+    parentList.push(allTasksList, todayList, upcomingList, garbage);
+}; //on page reload, these lists are pushed again, how to avoid this?
+
+//parentList.push(allTasksList, todayList, upcomingList, garbage); 
+
+localStorage.setItem("parentList", JSON.stringify(parentList));
+
+function updateStorage(storageKey, data) {
+
+    localStorage.setItem(`${storageKey}`, JSON.stringify(data));
+
+};
+    
+function getFromStorage() {
+
+    //parentList = JSON.parse(localStorage.getItem('parentList'));
     
     for (let i = 0; i < parentList.length; i++) {
-        if (item.list == ((parentList[i])[0])) {
+        parentList[i] = JSON.parse(localStorage.getItem(`${parentList[i]}`));
+    };
+};
+
+function addItemToList(item) {
+    if (item.list != 'garbage' && item.list != 'allTasksList') { allTasksList.push(item) }; //would remove this bit i think
+
+    for (let i = 0; i < parentList.length; i++) {
+        if (item.list == parentList[i][0]) {
             parentList[i].push(item);
             
             let display = document.getElementById('content');
         
             while(display.firstChild) { display.removeChild(display.firstChild); };
 
+            updateStorage(parentList[i][0], parentList[i]);
             createList(parentList[i]);
 
         } else if (item.list === 'garbage') {
@@ -33,12 +95,13 @@ function addItemToList(item) {
 function deleteTaskCard(locationID, listID) {
 
     if (listID != 'allTasksList') {
-    let mainListTargetCard = mainToDoList.filter(item => (item.id === locationID && item.list === listID));
+    let mainListTargetCard = allTasksList.filter(item => (item.id === locationID && item.list === listID));
 
-    let deletionIndex = mainToDoList.findIndex(card => (card.list == listID && card.id == locationID));
+    let deletionIndex = allTasksList.findIndex(card => (card.list == listID && card.id == locationID));
 
-    mainToDoList.splice(deletionIndex, 1); 
-    
+    allTasksList.splice(deletionIndex, 1); 
+    updateStorage("allTasksList", allTasksList);
+
     mainListTargetCard.list = 'garbage';
     garbage.push(mainListTargetCard);
     };
@@ -49,6 +112,7 @@ function deleteTaskCard(locationID, listID) {
             let targetCard = parentList[i].filter(item => item.id === locationID);
 
             parentList[i].splice(locationID, 1);
+            updateStorage(parentList[i][0], parentList[i]);
 
             targetCard.list = 'garbage';
             garbage.push(targetCard);

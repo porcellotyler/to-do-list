@@ -83,7 +83,9 @@ function createList(list) {
                 list[i].list = `${listSelector.options[listSelector.selectedIndex].text + 'List'}`;
 
                 addItemToList(list[i]);
-                deleteTaskCard(i, firstList);
+                if (firstList != 'allTaskList') {
+                    deleteTaskCard(i, firstList);
+                }; //need to figure out why its not displayed on allTasksList
             };
         toDoItemCard.append(saveButton);
 
