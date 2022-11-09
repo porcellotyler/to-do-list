@@ -1,10 +1,11 @@
 /* 
 remember to remove dev mode and source maps from webpack config before publishing on github
+
+could remove garbage list overall - it doesnt end up being used/needed
 */
 
-import { onClickAddItem } from "./to-do-items";
 import { viewList } from "./lists";
-import { enterCustomName } from "./lists";
+import { enterCustomName, onClickAddItem } from "./DOM";
 
 const addToDoItem = document.getElementById('addButton');
     addToDoItem.onclick = () => { onClickAddItem() };
