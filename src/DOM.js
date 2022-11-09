@@ -1,6 +1,7 @@
 import { addItemToList, deleteTaskCard, customListMaker } from "./lists";
 import { format, parseISO } from 'date-fns';
 import { toDoItem } from "./to-do-items";
+const _ = require('lodash');
 
 let listOptions = ['today', 'upcoming']
 
@@ -81,8 +82,9 @@ function createList(list) {
             saveButton.setAttribute('class', `item-${i}`);
             saveButton.innerText = 'Save';
             saveButton.onclick = () => {
-                
-                list[i].list = `${listSelector.options[listSelector.selectedIndex].text + 'List'}`;
+                let newList = `${listSelector.options[listSelector.selectedIndex].text + 'List'}`;
+
+                list[i].list = _.camelCase(newList);
 
                 addItemToList(list[i]);
                 if (firstList != 'allTaskList') {

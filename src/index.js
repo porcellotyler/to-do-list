@@ -2,6 +2,8 @@
 remember to remove dev mode and source maps from webpack config before publishing on github
 
 could remove garbage list overall - it doesnt end up being used/needed
+
+--issue-- cards duplicate sometimes on reload
 */
 
 import { viewList } from "./lists";

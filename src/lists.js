@@ -35,7 +35,7 @@ function updateStorage(storageKey, data) {
 
 function addItemToList(item) {
     if (item.list != 'garbage' && item.list != 'allTasksList') { allTasksList.push(item) }; //would remove this bit i think
-
+    
     for (let i = 0; i < parentList.length; i++) {
         if (item.list == parentList[i][0]) {
             parentList[i].push(item);
