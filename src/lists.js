@@ -1,34 +1,9 @@
 import { createList } from "./DOM";
 import { updateCardListOptions } from "./DOM";
 const _ = require('lodash');
-/*
-let allTasksList = ["allTasksList"];
-let todayList = ["todayList"];
-let upcomingList = ["upcomingList"];
-let garbage = ["garbage"];
-//adding the name of the list as the first item in each array so the addItemToList function knows what to point to
-
-let parentList = [];
-    parentList.push(allTasksList, todayList, upcomingList, garbage);
-
-//let parentList = JSON.parse(localStorage.getItem('parentList')) || [];
-//parentList.push(JSON.parse(localStorage.getItem('parentList')));
-//localStorage.setItem('parentList', JSON.stringify(parentList));
-//parentList.splice(0, 1); //addressing index 0 object being null rn
-//parentList.push(allTasksList, todayList, upcomingList, garbage);
-
-//localStorage.setItem('parentList', JSON.stringify(parentList));
-
-//parentList = JSON.parse(localStorage.getItem('parentList'));
-
-//let parentList = localStorage.setItem('parentList', JSON.stringify([`${allTasksList}, ${todayList}, ${upcomingList}, ${garbage}`]));
-//consider custom lists, may need to adjust this
-//localStorage.setItem('parentList', JSON.stringify(parentList)); */
 
 if (!localStorage.getItem("parentList")) {
     populateStorage();
-} else {
-   // getLists(); 
 };
 
 function populateStorage() {
@@ -51,26 +26,23 @@ let garbage = JSON.parse(localStorage.getItem("garbage"));
 
 if (parentList != null) {
     parentList.push(allTasksList, todayList, upcomingList, garbage);
-}; //on page reload, these lists are pushed again, how to avoid this?
-
-//parentList.push(allTasksList, todayList, upcomingList, garbage); 
-
-localStorage.setItem("parentList", JSON.stringify(parentList));
+}; //on page reload, these lists are pushed again, how to avoid this? 
 
 function updateStorage(storageKey, data) {
 
     localStorage.setItem(`${storageKey}`, JSON.stringify(data));
 
 };
-    
-function getFromStorage() {
 
-    //parentList = JSON.parse(localStorage.getItem('parentList'));
+//updateStorage("parentList", parentList);
+    
+/*function getFromStorage() {  
+    let parentList = JSON.parse(localStorage.getItem("parentList")); 
     
     for (let i = 0; i < parentList.length; i++) {
         parentList[i] = JSON.parse(localStorage.getItem(`${parentList[i]}`));
     };
-};
+}; */
 
 function addItemToList(item) {
     if (item.list != 'garbage' && item.list != 'allTasksList') { allTasksList.push(item) }; //would remove this bit i think
@@ -152,13 +124,15 @@ function enterCustomName() {
 
         contentDiv.removeChild(formDiv);
 
-        return customListMaker(customName), updateCardListOptions(customName);    
+        let camelName = _.camelCase(customName);
+
+        return customListMaker(camelName), updateCardListOptions(customName);    
     };
 };
 
 function customListMaker(name) {
     name = new Array(name);
-        
+        //need to fix DOM handling below so DOM display isnt camelCased
     let customArrayDiv = document.createElement('div');
         customArrayDiv.setAttribute('class', 'customArray');
         customArrayDiv.innerText = `${name}`;
@@ -166,6 +140,8 @@ function customListMaker(name) {
     name[0] = `${name + 'List'}`;
 
     parentList.push(name);
+    localStorage.setItem("parentList", JSON.stringify(parentList));
+    updateStorage(name[0], name);
 
     let customListImage = document.createElement("img");
         customListImage["src"] = '/img/customList.svg';
@@ -173,7 +149,7 @@ function customListMaker(name) {
 
     let createListDiv = document.getElementById('createList');
     let sidebarDiv = document.getElementById('sidebar');
-        sidebarDiv.insertBefore(customArrayDiv, createListDiv);
+        sidebarDiv.insertBefore(customArrayDiv, createListDiv); //DOM handling could be removed here and added to DOM.js for consistency
 };
 
 export { viewList };

@@ -85,7 +85,7 @@ function createList(list) {
                 addItemToList(list[i]);
                 if (firstList != 'allTaskList') {
                     deleteTaskCard(i, firstList);
-                }; //need to figure out why its not displayed on allTasksList
+                };
             };
         toDoItemCard.append(saveButton);
 
