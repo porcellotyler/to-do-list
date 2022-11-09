@@ -1,4 +1,6 @@
-/* remember to remove dev mode and source maps from webpack config before publishing on github */
+/* 
+remember to remove dev mode and source maps from webpack config before publishing on github
+*/
 
 import { onClickAddItem } from "./to-do-items";
 import { viewList } from "./lists";

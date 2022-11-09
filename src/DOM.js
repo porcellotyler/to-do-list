@@ -104,5 +104,20 @@ function createList(list) {
     };
 };
 
+function customListDisplay(listName) {
+    let customArrayDiv = document.createElement('div');
+        customArrayDiv.setAttribute('class', 'customArray');
+        customArrayDiv.innerText = `${listName}`;
+        
+    let customListImage = document.createElement("img");
+        customListImage["src"] = '/img/customList.svg';
+        customArrayDiv.prepend(customListImage);
+    
+    let createListDiv = document.getElementById('createList');
+    let sidebarDiv = document.getElementById('sidebar');
+        sidebarDiv.insertBefore(customArrayDiv, createListDiv);
+};
+
 export { updateCardListOptions };
 export { createList };
+export { customListDisplay };

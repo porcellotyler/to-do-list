@@ -1,9 +1,11 @@
-import { createList } from "./DOM";
+import { createList, customListDisplay } from "./DOM";
 import { updateCardListOptions } from "./DOM";
 const _ = require('lodash');
 
 if (!localStorage.getItem("parentList")) {
     populateStorage();
+} else {
+    getCustomLists();
 };
 
 function populateStorage() {
@@ -26,6 +28,7 @@ let garbage = JSON.parse(localStorage.getItem("garbage"));
 
 if (parentList != null) {
     parentList.push(allTasksList, todayList, upcomingList, garbage);
+    //getCustomLists();
 }; //on page reload, these lists are pushed again, how to avoid this? 
 
 function updateStorage(storageKey, data) {
@@ -100,7 +103,7 @@ function viewList(list) {
     let display = document.getElementById('content');
         while(display.firstChild) {
             display.removeChild(display.firstChild);
-        };
+        }; //this should be in the DOM module, but maybe it isnt necessary rn
 
     for (let i = 0; i < parentList.length; i++) {
         if (parentList[i].includes(camelList)) {
@@ -126,30 +129,30 @@ function enterCustomName() {
 
         let camelName = _.camelCase(customName);
 
-        return customListMaker(camelName), updateCardListOptions(customName);    
+        return customListMaker(camelName), updateCardListOptions(customName), customListDisplay(customName);    
     };
 };
 
 function customListMaker(name) {
     name = new Array(name);
-        //need to fix DOM handling below so DOM display isnt camelCased
-    let customArrayDiv = document.createElement('div');
-        customArrayDiv.setAttribute('class', 'customArray');
-        customArrayDiv.innerText = `${name}`;
 
     name[0] = `${name + 'List'}`;
 
     parentList.push(name);
     localStorage.setItem("parentList", JSON.stringify(parentList));
-    updateStorage(name[0], name);
+    
+    return updateStorage(name[0], name);
+};
 
-    let customListImage = document.createElement("img");
-        customListImage["src"] = '/img/customList.svg';
-        customArrayDiv.prepend(customListImage);
+function getCustomLists() {
+    let parentList = JSON.parse(localStorage.getItem("parentList"));
 
-    let createListDiv = document.getElementById('createList');
-    let sidebarDiv = document.getElementById('sidebar');
-        sidebarDiv.insertBefore(customArrayDiv, createListDiv); //DOM handling could be removed here and added to DOM.js for consistency
+    for (let i = 4; i < parentList.length; i++) { //i = 4 because parentList[0-3] are default lists already displayed
+        let displayName = _.startCase(parentList[i][0]).replace('List', '');
+
+        customListDisplay(displayName);
+        updateCardListOptions(displayName);
+    };
 };
 
 export { viewList };
