@@ -66,12 +66,13 @@ function createList(list) {
             for (const list of listOptions) {
                 var option = document.createElement("option");
                 option.value = list;
-                option.text = list;
+                option.text = _.startCase(list);
                 listSelector.appendChild(option);
             };
         
         let label = document.createElement('label');
-            label.innerText = 'List:';
+            label.setAttribute('class', 'dropdown');
+            label.innerText = 'List: ';
             label.htmlFor = 'listOptions';
         toDoItemCard.appendChild(label).appendChild(listSelector);
 
@@ -84,6 +85,8 @@ function createList(list) {
             saveButton.onclick = () => {
                 let newList = `${listSelector.options[listSelector.selectedIndex].text + 'List'}`;
 
+                list[i].title = title.innerText;
+                list[i].description = description.innerText;
                 list[i].list = _.camelCase(newList);
 
                 addItemToList(list[i]);
@@ -154,7 +157,7 @@ function onClickAddItem() {
 
     const contentDiv = document.getElementById('content');
     const formDiv = document.createElement('div');
-        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="title?"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <select name="prioritySelect" id="prioritySelect"> <option value="">--Set Priority--</option> <option value="low">Low</option> <option value="mid">Mid</option> <option value="high">High</option> </select> <input type="text" id="description" name="description" value="description?"/> <button id="create">Create</button> </div>'; // <select name="listID" id="listID"> <option value="">--Pick a list--</option> <option value="allTasksList">All tasks</option> <option value="todayList">Today</option> <option value="upcomingList">Upcoming</option> </select> 
+        formDiv.innerHTML = '<div class="modalContent"> <input type="text" id="title" name="title" value="To-Do Item Title"/> <input type="datetime-local" id="dueDate" name="dueDate" value="when?"/> <select name="prioritySelect" id="prioritySelect"> <option value="">--Set Priority--</option> <option value="low">Low</option> <option value="mid">Mid</option> <option value="high">High</option> </select> <input type="text" id="description" name="description" value="Item Description"/> <button id="create">Create</button> </div>'; // <select name="listID" id="listID"> <option value="">--Pick a list--</option> <option value="allTasksList">All tasks</option> <option value="todayList">Today</option> <option value="upcomingList">Upcoming</option> </select> 
         
         formDiv.setAttribute('class', 'modal');
         contentDiv.prepend(formDiv); 

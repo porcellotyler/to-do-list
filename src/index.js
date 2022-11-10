@@ -10,7 +10,7 @@ import { viewList } from "./lists";
 import { enterCustomName, onClickAddItem } from "./DOM";
 
 const addToDoItem = document.getElementById('addButton');
-    addToDoItem.onclick = () => { onClickAddItem() };
+    addToDoItem.onclick = () => { clearTarget(), onClickAddItem() };
 
 const sidebar = document.getElementById('sidebar');
     sidebar.onclick = e => {
@@ -18,8 +18,22 @@ const sidebar = document.getElementById('sidebar');
         if (e.target.children.length > 1) {
             return
         } else if (e.target.innerText.includes('Create List')) {
-            enterCustomName()
+            clearTarget();
+
+            enterCustomName();
         } else { 
             viewList(e.target.innerText);
+
+            clearTarget();
+
+            e.target.setAttribute("id", "targeted");
         };
     };
+
+function clearTarget() {
+    if (document.getElementById('targeted') != null) {
+        let oldTarget = document.getElementById('targeted');
+
+        oldTarget.removeAttribute("id");
+    };
+};
